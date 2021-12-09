@@ -26,5 +26,5 @@ public class LogInScreen {
     public void setSignUpButton(){
         System.out.println("SignUp");
     }
-    
+
 }
