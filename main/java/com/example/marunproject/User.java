@@ -5,6 +5,34 @@ public class User {
     private String surName;
     private int age;
     private String sex;
+    private String phoneNumber;
+    private String secondPhoneNumber;
+    private String adress;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getSecondPhoneNumber() {
+        return secondPhoneNumber;
+    }
+
+    public void setSecondPhoneNumber(String secondPhoneNumber) {
+        this.secondPhoneNumber = secondPhoneNumber;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
     private String userName;
     private String password;
 
