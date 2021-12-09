@@ -1,5 +1,5 @@
 package com.example.marunproject;
 
-public class Children extends User{
+public class LogInScreen {
 
 }
