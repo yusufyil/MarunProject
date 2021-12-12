@@ -7,4 +7,6 @@ module com.example.marunproject {
 
     opens com.example.marunproject to javafx.fxml;
     exports com.example.marunproject;
+    exports com.example.marunproject.WarningWindows;
+    opens com.example.marunproject.WarningWindows to javafx.fxml;
 }

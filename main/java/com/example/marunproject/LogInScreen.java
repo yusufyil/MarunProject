@@ -1,5 +1,6 @@
 package com.example.marunproject;
 
+import com.example.marunproject.Exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,12 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class LogInScreen {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     @FXML
     Label header;
     @FXML
@@ -30,25 +26,58 @@ public class LogInScreen {
     @FXML
     Button signUpButton;
     @FXML
-    Hyperlink myLink;
     public void setEnterButton(ActionEvent event){
-        //System.out.println("Enter");
         final String userName = userNameInput.getText();
         final String password = passwordInput.getText();
-        System.out.println("girdiler = " + userName +" " + password);
-        switchToUserScene(event);
+        if(userName.equals("") || password.equals("")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("HATA!");
+            alert.setTitle("Marmara <3");
+            alert.setContentText("Giriş yapabilmek için kullanıcı adı ve şifre kısımlarını doldurmalısınız.");
+            alert.show();
+        }else{
+            try{
+                if(Database.isValidUser(userName,password)){
+                    System.out.println("Enter");
+                    System.out.println("girdiler = " + userName +" " + password);
+                    switchToUserScene(event, userName);
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Marmara <3");
+                    alert.setContentText("Yanlış şifre girdiniz.");
+                    alert.setHeaderText("Eğer şifrenizi unuttuysanız sınıf öğretmeniyle ileitişme geçebilirsiniz.");
+                    alert.show();
+                }
+            }catch (UserNotFoundException e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Marmara <3");
+                alert.setHeaderText("Böyle bir kullanıcı yok.");
+                alert.setContentText("Kullanıcı adını yanlış yazmış olabilirsiniz.");
+                alert.show();
+            }
+        }
 
     }
     public void setSignUpButton(ActionEvent event){
-        System.out.println("SignUp");
+
     }
-    public void switchToUserScene(ActionEvent event){
+    public void switchToUserScene(ActionEvent event, String userName){
         try {
-            root = FXMLLoader.load(getClass().getResource("teacherscreen.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("teacherscreen.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            TeacherScreen ts = loader.getController();
+            User user = Database.getUser(userName);
+            ts.setNameField(user.getName());
+            ts.setSurnameField(user.getSurName());
+            ts.setPhoneField(user.getPhoneNumber());
+            ts.setSecondPhoneField(user.getSecondPhoneNumber());
+            ts.setAdressField(user.getAdress());
+            ts.setUserTypeField(user.getUserType());
         } catch (Exception e) {
             System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
         }

@@ -1,4 +1,7 @@
 package com.example.marunproject;
+import com.example.marunproject.Exceptions.InvalidPasswordException;
+import com.example.marunproject.Exceptions.MissingValueException;
+import com.example.marunproject.Exceptions.UserNotFoundException;
 import com.sun.jdi.connect.Connector;
 
 import java.security.PublicKey;
@@ -60,5 +63,50 @@ public class Database {
             System.out.println("Bir hata olustu.\n" + e);
         }
         return null;
+    }
+    public static boolean isValidUser(String userName, String password) throws  UserNotFoundException{
+        Connection conn = getConnection();
+        try{
+            PreparedStatement stm = conn.prepareStatement(String.format("SELECT username, password FROM users WHERE username = \"%s\"", userName));
+            ResultSet resultSet = stm.executeQuery();
+            while(resultSet.next()){
+                if(userName.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password"))){
+                    return true;
+                }
+                else if(userName.equals(resultSet.getString("username"))){
+                    return false;
+                }
+                else{
+                    throw new UserNotFoundException();
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu **.\n" + e);
+        }
+        return false;
+    }
+    public static User getUser(String userName){
+        User user = new User();
+        try{
+            Connection conn = getConnection();
+            PreparedStatement stm = conn.prepareStatement(String.format("SELECT * FROM users WHERE username = \"%s\"", userName));
+            ResultSet resultSet = stm.executeQuery();
+            while(resultSet.next()){
+                user.setName(resultSet.getString("name"));
+                user.setSurName(resultSet.getString("surname"));
+                user.setAge(resultSet.getInt("age"));
+                user.setPhoneNumber(resultSet.getString("phonenumber"));
+                user.setSecondPhoneNumber(resultSet.getString("secondphonenumber"));
+                user.setAdress(resultSet.getString("adress"));
+                user.setUserType(resultSet.getString("usertype"));
+                user.setSex(resultSet.getString("sex"));
+                user.setUserName(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+            }
+        }
+        catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+        return user;
     }
 }
