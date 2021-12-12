@@ -4,7 +4,6 @@ module com.example.marunproject {
     requires jdk.jdi;
     requires java.sql;
 
-
     opens com.example.marunproject to javafx.fxml;
     exports com.example.marunproject;
     exports com.example.marunproject.WarningWindows;
