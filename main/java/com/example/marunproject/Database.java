@@ -109,4 +109,19 @@ public class Database {
         }
         return user;
     }
+    public static boolean isValidUsername(String username){
+        boolean valid = false;
+        try {
+            Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(String.format("SELECT username FROM users WHERE username = \"%s\"",username));
+            ResultSet resultSet = stmt.executeQuery();
+            //resultSet.
+            while (resultSet.next()){
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+        return valid;
+    }
 }

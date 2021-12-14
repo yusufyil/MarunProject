@@ -66,6 +66,8 @@ public class LogInScreen {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+            SignUpScreen signUpScreen = loader.getController();
+            signUpScreen.setChoiceBoxes();
             stage.setScene(scene);
             stage.setTitle("Kayıt Formu Ekranı");
             stage.initModality(Modality.APPLICATION_MODAL);
