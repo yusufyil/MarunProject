@@ -1,5 +1,7 @@
 package com.example.marunproject;
 
+import javafx.scene.chart.PieChart;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -29,6 +31,16 @@ public class User {
         }
 
         return true;
+    }
+    public void deleteUser(){
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(String.format("DELETE FROM USERS WHERE username = \"%s\"",userName));
+            stmt.executeUpdate();
+            conn.close();
+        }catch (Exception e){
+            System.out.println("Kullanıcı silme işlemi esnasında bir hata oluşutu.\n" + e);
+        }
     }
     //set and get methods..
     public String getUserType() {
