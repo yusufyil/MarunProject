@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Random;
 
 public class TeacherScreen {
     @FXML
@@ -33,6 +35,10 @@ public class TeacherScreen {
     TextField header;
     @FXML
     TextArea announcement;
+    @FXML
+    TextArea announcementText;
+    @FXML
+    Label announcementHeader;
     String username;
     public void setUsername(String username){
         this.username = username;
@@ -89,6 +95,22 @@ public class TeacherScreen {
             Connection conn = Database.getConnection();
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO announcements(header, message) VALUES('"+header+"','"+text+"')");
             stmt.executeUpdate();
+            conn.close();
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+    }
+    public void displayAnnouncemenets(){
+        //getting last announcement from db
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM announcements");
+            ResultSet resultSet = stmt.executeQuery();
+            while(resultSet.last()){
+                announcementHeader.setText(resultSet.getString("header"));
+                announcementText.setText(resultSet.getString("message"));
+                break;
+            }
             conn.close();
         }catch (Exception e){
             System.out.println("Bir hata oluştu.\n" + e);

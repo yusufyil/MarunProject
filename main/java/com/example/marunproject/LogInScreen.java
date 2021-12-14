@@ -94,6 +94,7 @@ public class LogInScreen {
             ts.setAdressField(user.getAdress());
             ts.setUserTypeField(user.getUserType());
             ts.setUsername(user.getUserName());
+            ts.displayAnnouncemenets();
         } catch (Exception e) {
             System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
         }

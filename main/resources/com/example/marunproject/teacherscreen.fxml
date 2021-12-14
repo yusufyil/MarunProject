@@ -79,5 +79,23 @@
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab text="Aktif Duyurular">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="announcementHeader" alignment="CENTER" contentDisplay="CENTER" layoutX="297.0" layoutY="39.0" prefHeight="18.0" prefWidth="306.0" text="Duyuru Başılığı" textFill="#e6f2f0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="announcementText" layoutX="73.0" layoutY="106.0" prefHeight="433.0" prefWidth="755.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
   </tabs>
 </TabPane>

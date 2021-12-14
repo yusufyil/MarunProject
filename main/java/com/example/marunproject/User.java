@@ -1,6 +1,5 @@
 package com.example.marunproject;
 
-import javafx.scene.chart.PieChart;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
