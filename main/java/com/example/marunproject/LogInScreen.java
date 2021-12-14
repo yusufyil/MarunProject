@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LogInScreen {
@@ -60,6 +61,18 @@ public class LogInScreen {
 
     }
     public void setSignUpButton(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("signupscreen.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Kayıt Formu Ekranı");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
 
     }
     public void switchToUserScene(ActionEvent event, String userName){
