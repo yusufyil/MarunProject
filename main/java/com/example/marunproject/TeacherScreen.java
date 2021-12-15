@@ -7,14 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Random;
+
 
 public class TeacherScreen {
     @FXML
@@ -39,6 +38,18 @@ public class TeacherScreen {
     TextArea announcementText;
     @FXML
     Label announcementHeader;
+    @FXML
+    Label applicationName;
+    @FXML
+    Label applicationSurname;
+    @FXML
+    Label applicationUsertype;
+    @FXML
+    Label applicationUsername;
+    @FXML
+    Button applicationAcceptButton;
+    @FXML
+    Button applicationDenyButton;
     String username;
     public void setUsername(String username){
         this.username = username;
@@ -114,6 +125,48 @@ public class TeacherScreen {
             conn.close();
         }catch (Exception e){
             System.out.println("Bir hata oluştu.\n" + e);
+        }
+    }
+    public void displayApplications(){
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM signupforms");
+            ResultSet resultSet = stmt.executeQuery();
+            while(resultSet.last()){
+                    applicationName.setText(resultSet.getString("name"));
+                    applicationSurname.setText(resultSet.getString("surname"));
+                    applicationUsertype.setText(resultSet.getString("usertype"));
+                    applicationUsername.setText(resultSet.getString("username"));
+                    break;
+            }
+            conn.close();
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+    }
+    public void onAcceptButton(){
+        if(applicationName.getText().equals("Başvuru yok")){
+            return;
+        }
+        else{
+            User user = Database.getUserFromApplication(applicationUsername.getText());
+            System.out.println(user.getName());
+            user.saveUserFromApplications();
+        }
+    }
+    public void onDenyButton(){
+        if(applicationName.getText().equals("Başvuru yok")){
+            return;
+        }
+        else{
+            try{
+                Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(String.format("DELETE FROM signupforms WHERE username= \"%s\"",applicationUsername.getText()));
+                stmt.executeUpdate();
+                conn.close();
+            }catch (Exception e){
+                System.out.println("Bir hata oluştu.\n" + e);
+            }
         }
     }
 }

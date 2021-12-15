@@ -97,5 +97,49 @@
             </AnchorPane>
          </content>
       </Tab>
+      <Tab text="Başvuruları Değerlendir">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="49.0" text="Son Başvuru" textFill="#e4dcdc">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="40.0" arcWidth="50.0" fill="DODGERBLUE" height="52.0" layoutX="1.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+                  <Label layoutX="35.0" layoutY="124.0" text="Ad:" />
+                  <Line endX="-109.0" endY="245.0" layoutX="199.0" layoutY="159.0" startX="-109.0" startY="-92.0" stroke="#3ad322" />
+                  <Label fx:id="applicationName" layoutX="111.0" layoutY="118.0" prefHeight="18.0" prefWidth="171.0" text="Başvuru yok" textFill="#ebe3e3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="40.0" arcWidth="50.0" fill="DODGERBLUE" height="52.0" layoutX="1.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+                  <Label layoutX="26.0" layoutY="194.0" text="soyad:" />
+                  <Label fx:id="applicationSurname" layoutX="105.0" layoutY="188.0" prefHeight="18.0" prefWidth="171.0" text="Başvuru yok" textFill="#ebe3e3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="40.0" arcWidth="50.0" fill="DODGERBLUE" height="52.0" layoutX="1.0" layoutY="313.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+                  <Label layoutX="6.0" layoutY="330.0" text="Kullanıcı Tipi:" />
+                  <Label fx:id="applicationUsertype" layoutX="105.0" layoutY="324.0" prefHeight="18.0" prefWidth="171.0" text="Başvuru yok" textFill="#ebe3e3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="applicationAcceptButton" layoutX="379.0" layoutY="113.0" mnemonicParsing="false" onAction="#onAcceptButton" prefHeight="40.0" prefWidth="406.0" text="Kabul Et" />
+                  <Button fx:id="applicationDenyButton" layoutX="379.0" layoutY="319.0" mnemonicParsing="false" onAction="#onDenyButton" prefHeight="40.0" prefWidth="406.0" text="Reddet" />
+                  <Rectangle arcHeight="40.0" arcWidth="50.0" fill="DODGERBLUE" height="52.0" layoutX="1.0" layoutY="243.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+                  <Label fx:id="applicationUsername" layoutX="105.0" layoutY="254.0" prefHeight="18.0" prefWidth="171.0" text="Başvuru yok" textFill="#ebe3e3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="260.0" text="Kullanıcı Adı:" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
   </tabs>
 </TabPane>

@@ -3,6 +3,7 @@ package com.example.marunproject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class User {
     private String name;
@@ -40,6 +41,43 @@ public class User {
         }catch (Exception e){
             System.out.println("Kullanıcı silme işlemi esnasında bir hata oluşutu.\n" + e);
         }
+    }
+    public void deleteUserFromApplications(){
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(String.format("DELETE FROM signupforms WHERE username = \"%s\"",userName));
+            stmt.executeUpdate();
+            conn.close();
+        }catch (Exception e){
+            System.out.println("Kullanıcı silme işlemi esnasında bir hata oluşutu.\n" + e);
+        }
+    }
+    public void saveUserFromApplications(){
+        User user = new User();
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stm = conn.prepareStatement(String.format("SELECT * FROM signupforms WHERE username = \"%s\"", userName));
+            ResultSet resultSet = stm.executeQuery();
+            while(resultSet.next()){
+                user.setName(resultSet.getString("name"));
+                user.setSurName(resultSet.getString("surname"));
+                user.setAge(resultSet.getInt("age"));
+                user.setPhoneNumber(resultSet.getString("phone"));
+                user.setSecondPhoneNumber(resultSet.getString("secondphone"));
+                user.setAdress(resultSet.getString("address"));
+                user.setUserType(resultSet.getString("usertype"));
+                user.setSex(resultSet.getString("sex"));
+                user.setUserName(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+            }
+            PreparedStatement stmt = conn.prepareStatement(String.format("DELETE FROM signupforms WHERE username = \"%s\"",user.userName));
+            stmt.executeUpdate();
+            conn.close();
+        }
+        catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+        user.saveUser();
     }
     //set and get methods..
     public String getUserType() {

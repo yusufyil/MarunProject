@@ -95,9 +95,33 @@ public class Database {
                 user.setName(resultSet.getString("name"));
                 user.setSurName(resultSet.getString("surname"));
                 user.setAge(resultSet.getInt("age"));
-                user.setPhoneNumber(resultSet.getString("phonenumber"));
-                user.setSecondPhoneNumber(resultSet.getString("secondphonenumber"));
-                user.setAdress(resultSet.getString("adress"));
+                user.setPhoneNumber(resultSet.getString("phone"));
+                user.setSecondPhoneNumber(resultSet.getString("secondphone"));
+                user.setAdress(resultSet.getString("address"));
+                user.setUserType(resultSet.getString("usertype"));
+                user.setSex(resultSet.getString("sex"));
+                user.setUserName(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+            }
+        }
+        catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+        return user;
+    }
+    public static User getUserFromApplication(String userName){
+        User user = new User();
+        try{
+            Connection conn = getConnection();
+            PreparedStatement stm = conn.prepareStatement(String.format("SELECT * FROM signupforms WHERE username = \"%s\"", userName));
+            ResultSet resultSet = stm.executeQuery();
+            while(resultSet.next()){
+                user.setName(resultSet.getString("name"));
+                user.setSurName(resultSet.getString("surname"));
+                user.setAge(resultSet.getInt("age"));
+                user.setPhoneNumber(resultSet.getString("phone"));
+                user.setSecondPhoneNumber(resultSet.getString("secondphone"));
+                user.setAdress(resultSet.getString("address"));
                 user.setUserType(resultSet.getString("usertype"));
                 user.setSex(resultSet.getString("sex"));
                 user.setUserName(resultSet.getString("username"));
