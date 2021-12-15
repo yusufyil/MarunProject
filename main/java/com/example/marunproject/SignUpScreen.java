@@ -60,7 +60,7 @@ public class SignUpScreen {
             userType = "teacher";
         }
         else{
-            userType ="Parent";
+            userType ="parent";
         }
 
         try{

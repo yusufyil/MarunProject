@@ -148,4 +148,22 @@ public class Database {
         }
         return valid;
     }
+    public static boolean isTeacher(String username){
+        User user = getUser(username);
+        if (user.getUserType().equals("teacher")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean isParent(String username){
+        User user = getUser(username);
+        if (user.getUserType().equals("parent")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

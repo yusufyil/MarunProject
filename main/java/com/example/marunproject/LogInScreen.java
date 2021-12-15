@@ -38,10 +38,11 @@ public class LogInScreen {
             alert.show();
         }else{
             try{
-                if(Database.isValidUser(userName,password)){
-                    System.out.println("Enter");
-                    System.out.println("girdiler = " + userName +" " + password);
+                if(Database.isValidUser(userName,password) && Database.isTeacher(userName)){
                     switchToUserScene(event, userName);
+                }
+                else if(Database.isValidUser(userName,password) && Database.isParent(userName)){
+                    switchToParentScene(event, userName);
                 }
                 else{
                     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -99,7 +100,19 @@ public class LogInScreen {
         } catch (Exception e) {
             System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
         }
+    }
+    public void switchToParentScene(ActionEvent event, String userName){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("parentscreen.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
 
+        } catch (Exception e) {
+            System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
+        }
     }
 
 }
