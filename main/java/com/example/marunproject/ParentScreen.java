@@ -118,6 +118,20 @@ public class ParentScreen {
         }
     }
     public void onUpdateKid(){
-        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("childrenupdatescreen.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            ChildrenUpdateScreen childrenUpdateScreen = loader.getController();
+            childrenUpdateScreen.setUsername(username);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Çocuk bilgileri güncelleme ekranı.");
+            stage.show();
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
     }
 }
