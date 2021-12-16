@@ -39,7 +39,7 @@ public class LogInScreen {
         }else{
             try{
                 if(Database.isValidUser(userName,password) && Database.isTeacher(userName)){
-                    switchToUserScene(event, userName);
+                    switchToTeacherScene(event, userName);
                 }
                 else if(Database.isValidUser(userName,password) && Database.isParent(userName)){
                     switchToParentScene(event, userName);
@@ -78,7 +78,7 @@ public class LogInScreen {
         }
 
     }
-    public void switchToUserScene(ActionEvent event, String userName){
+    public void switchToTeacherScene(ActionEvent event, String userName){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("teacherscreen.fxml"));
             Parent root = loader.load();
@@ -97,6 +97,7 @@ public class LogInScreen {
             ts.setUsername(user.getUserName());
             ts.displayAnnouncemenets();
             ts.displayApplications();
+            ts.setDeleteParentScreen();
         } catch (Exception e) {
             System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
         }
@@ -109,7 +110,17 @@ public class LogInScreen {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
+            ParentScreen ps = loader.getController();
+            User user = Database.getUser(userName);
+            ps.setNameField(user.getName());
+            ps.setSurnameField(user.getSurName());
+            ps.setPhoneField(user.getPhoneNumber());
+            ps.setSecondPhoneField(user.getSecondPhoneNumber());
+            ps.setAdressField(user.getAdress());
+            ps.setUserTypeField(user.getUserType());
+            ps.setUsername(user.getUserName());
+            ps.displayAnnouncemenets();
+            ps.setChildrenScreen();
         } catch (Exception e) {
             System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
         }

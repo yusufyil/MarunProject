@@ -13,9 +13,12 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class TeacherScreen {
+    private ArrayList<User> parentList;
+    private int userIndex = 0;
     @FXML
     Label nameField;
     @FXML
@@ -50,6 +53,16 @@ public class TeacherScreen {
     Button applicationAcceptButton;
     @FXML
     Button applicationDenyButton;
+    @FXML
+    Label parentName;
+    @FXML
+    Label parentSurname;
+    @FXML
+    Label parentUsername;
+    @FXML
+    Button nextParent;
+    @FXML
+    Button deleteAccount;
     String username;
     public void setUsername(String username){
         this.username = username;
@@ -168,5 +181,41 @@ public class TeacherScreen {
                 System.out.println("Bir hata oluştu.\n" + e);
             }
         }
+    }
+    public void setDeleteParentScreen(){
+        parentList = new ArrayList<>();
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT username FROM users WHERE usertype = " + String.format("\"parent\""));
+            ResultSet resultSet = stmt.executeQuery();
+            User user = new User();
+            while(resultSet.next()){
+                 user = Database.getUser(resultSet.getString("username"));
+                parentList.add(user);
+            }
+        }catch (Exception e){
+            System.out.println("Bir Hata oluştu.\n" + e);
+        }
+        //initializing first to the scene
+        parentName.setText(parentList.get(userIndex).getName());
+        parentSurname.setText(parentList.get(userIndex).getSurName());
+        parentUsername.setText(parentList.get(userIndex).getUserName());
+    }
+    public void onNextButton(){
+        userIndex +=1;
+        userIndex %= parentList.size();
+        parentName.setText(parentList.get(userIndex).getName());
+        parentSurname.setText(parentList.get(userIndex).getSurName());
+        parentUsername.setText(parentList.get(userIndex).getUserName());
+    }
+    public void onDeleteButton(){
+        User user = new User();
+        user = Database.getUser(parentUsername.getText());
+        user.deleteUser();
+        parentList.remove(userIndex);
+        userIndex %= parentList.size();
+        parentName.setText(parentList.get(userIndex).getName());
+        parentSurname.setText(parentList.get(userIndex).getSurName());
+        parentUsername.setText(parentList.get(userIndex).getUserName());
     }
 }
