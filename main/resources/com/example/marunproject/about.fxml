@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002b38;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marunproject.About">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="39.0" text="Nesne Yönelimli Programlama" textFill="#e1d8d8">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="96.0" text="Dönem Ödevi" textFill="#e1d8d8">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="173.0" prefHeight="27.0" prefWidth="135.0" text="Yusuf Yıldırım" textFill="#f2ecec">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="208.0" prefHeight="27.0" prefWidth="123.0" text="170420011" textFill="#f2ecec">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="243.0" prefHeight="27.0" prefWidth="190.0" text="Marmara Üniversitesi" textFill="#f2ecec">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="12.0" layoutY="282.0" prefHeight="27.0" prefWidth="151.0" text="16/12/2021" textFill="#f2ecec">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

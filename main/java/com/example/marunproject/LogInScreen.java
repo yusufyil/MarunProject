@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -27,6 +28,7 @@ public class LogInScreen {
     @FXML
     Button signUpButton;
     @FXML
+    Button aboutUsButton;
     public void setEnterButton(ActionEvent event){
         final String userName = userNameInput.getText();
         final String password = passwordInput.getText();
@@ -71,6 +73,22 @@ public class LogInScreen {
             signUpScreen.setChoiceBoxes();
             stage.setScene(scene);
             stage.setTitle("Kayıt Formu Ekranı");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }catch (Exception e){
+            System.out.println("Bir hata oluştu.\n" + e);
+        }
+
+    }
+    public void onAboutUsButton(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("about.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Hakkımızda");
+            stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         }catch (Exception e){
