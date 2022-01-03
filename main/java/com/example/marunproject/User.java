@@ -17,6 +17,23 @@ public class User {
     private String password;
     private String userType;
 
+    public User() {
+        System.out.println("isimsiz bir kullanıcı oluşturuldu");
+    }
+
+    public User(String name, String surName, int age, String sex, String phoneNumber, String secondPhoneNumber, String adress, String userName, String password, String userType) {
+        this.name = name;
+        this.surName = surName;
+        this.age = age;
+        this.sex = sex;
+        this.phoneNumber = phoneNumber;
+        this.secondPhoneNumber = secondPhoneNumber;
+        this.adress = adress;
+        this.userName = userName;
+        this.password = password;
+        this.userType = userType;
+    }
+
     public boolean saveUser(){
         try{
             Connection conn = Database.getConnection();

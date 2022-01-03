@@ -26,44 +26,7 @@ public class Database {
         }
         return null;
     }
-
-    public static void post(){
-        final int var0 = 42;
-        final String var1 = "Yusuf";
-        final String var2 = "Yıldırım";
-        try{
-            Connection conn = getConnection();
-            PreparedStatement posted = conn.prepareStatement("INSERT INTO test(no, ad, soyad) VALUES ('"+var0+"','"+var1+"','"+var2+"')");
-            posted.executeUpdate();
-            conn.close();
-        }catch (Exception e){
-            System.out.println("Bir hata oluştu.\n" + e);
-        }
-        finally {
-            System.out.println("işlem bitti.");
-        }
-    }
-    public static ArrayList<String> get(){
-        try{
-            Connection conn = getConnection();
-            PreparedStatement statement = conn.prepareStatement("SELECT no, ad, soyad FROM test ");
-            ResultSet result = statement.executeQuery();
-            ArrayList<String> array = new ArrayList<String>();
-            while (result.next()){
-                System.out.print(result.getInt("no"));
-                System.out.print(" ");
-                System.out.print(result.getString("ad"));
-                System.out.print(" ");
-                System.out.println(result.getString("soyad"));
-                array.add(result.getString("soyad"));
-            }
-            System.out.println("her sey secildi");
-            return array;
-        }catch (Exception e){
-            System.out.println("Bir hata olustu.\n" + e);
-        }
-        return null;
-    }
+    
     public static boolean isValidUser(String userName, String password) throws  UserNotFoundException{
         Connection conn = getConnection();
         try{

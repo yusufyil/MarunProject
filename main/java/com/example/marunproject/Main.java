@@ -19,7 +19,6 @@ public class Main extends Application {
         Database.getConnection();
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }
