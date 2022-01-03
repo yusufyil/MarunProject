@@ -1,15 +1,11 @@
 package com.example.marunproject;
-import com.example.marunproject.Exceptions.InvalidPasswordException;
-import com.example.marunproject.Exceptions.MissingValueException;
 import com.example.marunproject.Exceptions.UserNotFoundException;
-import com.sun.jdi.connect.Connector;
 
-import java.security.PublicKey;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 public class Database {
     public static Connection getConnection(){
         try{
@@ -26,7 +22,7 @@ public class Database {
         }
         return null;
     }
-    
+
     public static boolean isValidUser(String userName, String password) throws  UserNotFoundException{
         Connection conn = getConnection();
         try{

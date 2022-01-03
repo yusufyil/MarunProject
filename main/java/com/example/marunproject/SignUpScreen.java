@@ -71,7 +71,7 @@ public class SignUpScreen {
             else if(password.length() < 8){
                 throw new InvalidPasswordException();
             }
-            else if (Database.isValidUsername(username)){
+            else if (!Database.isValidUsername(username)){
                 throw new InvalidUsernameException();
             }
             //trying to invoke NumberFormatException
