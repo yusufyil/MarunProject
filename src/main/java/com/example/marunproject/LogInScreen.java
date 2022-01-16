@@ -116,6 +116,7 @@ public class LogInScreen {
             ts.displayAnnouncemenets();
             ts.displayApplications();
             ts.setDeleteParentScreen();
+            ts.setChildrenScreen();
         } catch (Exception e) {
             System.out.println("Ekran değişimi sırasında bir hata meydana geldi.\n" + e);
         }

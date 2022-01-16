@@ -18,7 +18,9 @@ import java.util.ArrayList;
 
 public class TeacherScreen {
     private ArrayList<User> parentList;
+    private ArrayList<Children> childrenList;
     private int userIndex = 0;
+    private int childrenIndex = 0;
     @FXML
     Label nameField;
     @FXML
@@ -63,6 +65,20 @@ public class TeacherScreen {
     Button nextParent;
     @FXML
     Button deleteAccount;
+    @FXML
+    Label studentName;
+    @FXML
+    Label studentSurname;
+    @FXML
+    Label parentUname;
+    @FXML
+    Label drugs;
+    @FXML
+    Label allergy;
+    @FXML
+    Button nextStudent;
+    @FXML
+    Button previousStudent;
     String username;
     public void setUsername(String username){
         this.username = username;
@@ -188,9 +204,9 @@ public class TeacherScreen {
             Connection conn = Database.getConnection();
             PreparedStatement stmt = conn.prepareStatement("SELECT username FROM users WHERE usertype = " + String.format("\"parent\""));
             ResultSet resultSet = stmt.executeQuery();
-            User user = new User();
+            User user;
             while(resultSet.next()){
-                 user = Database.getUser(resultSet.getString("username"));
+                user = Database.getUser(resultSet.getString("username"));
                 parentList.add(user);
             }
         }catch (Exception e){
@@ -217,5 +233,82 @@ public class TeacherScreen {
         parentName.setText(parentList.get(userIndex).getName());
         parentSurname.setText(parentList.get(userIndex).getSurName());
         parentUsername.setText(parentList.get(userIndex).getUserName());
+    }//sonra bak
+    public void setChildrenScreen(){
+        childrenList = new ArrayList<>();
+        try{
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM children");
+            ResultSet resultSet = stmt.executeQuery();
+            while(resultSet.next()){
+                Children children  = new Children();
+                children.setName(resultSet.getString("name"));
+                children.setSurName(resultSet.getString("surname"));
+                children.setParentUserName(resultSet.getString("parentusername"));
+                children.setAge(resultSet.getInt("age"));
+                children.setAllergy(resultSet.getString("allergy"));
+                children.setDrugs(resultSet.getString("drugs"));
+                childrenList.add(children);
+            }
+            System.out.println(childrenList.size() + " sayısı kadar çocuk kayıtly" + childrenList.get(5).getName());
+        }catch (Exception e){
+            System.out.println("Bir Hata oluştu.\n" + e);
+        }
+        //setting up first child to the scene
+        if(childrenList.size() != 0){
+            studentName.setText(childrenList.get(0).getName());
+            studentSurname.setText(childrenList.get(0).getSurName());
+            parentUname.setText(childrenList.get(0).getParentUserName());
+            drugs.setText(childrenList.get(0).getDrugs());
+            allergy.setText(childrenList.get(0).getAllergy());
+        }
+    }
+    public void onNextStudent(){
+        if(childrenList.size() == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Uyarı!");
+            alert.setContentText("listede kayıtlı son çocuk görüntüleniyor.");
+            alert.show();
+        }
+        else if (childrenIndex != childrenList.size() - 1){
+            childrenIndex += 1;
+            System.out.println(childrenList.get(childrenIndex).getName());
+            studentName.setText(childrenList.get(childrenIndex).getName());
+            studentSurname.setText(childrenList.get(childrenIndex).getSurName());
+            parentUname.setText(childrenList.get(childrenIndex).getParentUserName());
+            drugs.setText(childrenList.get(childrenIndex).getDrugs());
+            allergy.setText(childrenList.get(childrenIndex).getAllergy());
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Uyarı!");
+            alert.setContentText("listede görüntülenecek çocuk yok.");
+            alert.show();
+        }
+    }
+    public void onPreviousStudent(){
+        System.out.println("önceki");
+
+        if(childrenList.size() == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Uyarı!");
+            alert.setContentText("listede görüntülenecek çocuk yok.");
+            alert.show();
+        }
+        else if (childrenIndex != 0){
+            childrenIndex -= 1;
+            System.out.println(childrenList.get(childrenIndex).getName());
+            studentName.setText(childrenList.get(childrenIndex).getName());
+            studentSurname.setText(childrenList.get(childrenIndex).getSurName());
+            parentUname.setText(childrenList.get(childrenIndex).getParentUserName());
+            drugs.setText(childrenList.get(childrenIndex).getDrugs());
+            allergy.setText(childrenList.get(childrenIndex).getAllergy());
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Uyarı!");
+            alert.setContentText("listede kayıtlı ilk çocuk görüntüleniyor.");
+            alert.show();
+        }
     }
 }
