@@ -229,11 +229,19 @@ public class TeacherScreen {
         user = Database.getUser(parentUsername.getText());
         user.deleteUser();
         parentList.remove(userIndex);
-        userIndex %= parentList.size();
-        parentName.setText(parentList.get(userIndex).getName());
-        parentSurname.setText(parentList.get(userIndex).getSurName());
-        parentUsername.setText(parentList.get(userIndex).getUserName());
-    }//sonra bak
+        if(parentList.size() != 0){
+            userIndex %= parentList.size();
+            parentName.setText(parentList.get(userIndex).getName());
+            parentSurname.setText(parentList.get(userIndex).getSurName());
+            parentUsername.setText(parentList.get(userIndex).getUserName());
+        }
+        else{
+            userIndex = 0;
+            parentName.setText("Kayıt yok.");
+            parentSurname.setText("Kayıt yok.");
+            parentUsername.setText("Kayıt yok.");
+        }
+    }
     public void setChildrenScreen(){
         childrenList = new ArrayList<>();
         try{
@@ -250,7 +258,6 @@ public class TeacherScreen {
                 children.setDrugs(resultSet.getString("drugs"));
                 childrenList.add(children);
             }
-            System.out.println(childrenList.size() + " sayısı kadar çocuk kayıtly" + childrenList.get(5).getName());
         }catch (Exception e){
             System.out.println("Bir Hata oluştu.\n" + e);
         }
@@ -272,7 +279,6 @@ public class TeacherScreen {
         }
         else if (childrenIndex != childrenList.size() - 1){
             childrenIndex += 1;
-            System.out.println(childrenList.get(childrenIndex).getName());
             studentName.setText(childrenList.get(childrenIndex).getName());
             studentSurname.setText(childrenList.get(childrenIndex).getSurName());
             parentUname.setText(childrenList.get(childrenIndex).getParentUserName());
@@ -287,8 +293,6 @@ public class TeacherScreen {
         }
     }
     public void onPreviousStudent(){
-        System.out.println("önceki");
-
         if(childrenList.size() == 0){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Uyarı!");
