@@ -15,7 +15,7 @@ public class Database {
             String password = "Y46513y";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url,userName,password);
-            System.out.println("Database bağlantısı kuruldu");
+            //System.out.println("Database bağlantısı kuruldu");
             return conn;
         }catch (Exception e){
             System.out.println("Bir hata oluştu\n" + e);
@@ -102,6 +102,7 @@ public class Database {
             while (resultSet.next()){
                 return true;
             }
+            conn.close();
         }catch (Exception e){
             System.out.println("Bir hata oluştu.\n" + e);
         }

@@ -21,7 +21,6 @@ public class Main extends Application {
         stage.setTitle("Kreş Yönetim Sistemi");
         stage.setScene(scene);
         stage.setResizable(false);
-        Database.getConnection();
         stage.show();
     }
     public void startTest(){
